@@ -1,0 +1,89 @@
+[tool.poetry]
+name = 'proxyx'
+version = "0.0.1"
+description = 'A very simple proxy server that just works.'
+authors = [
+    'Tom Wojcik <proxyx-pkg@tomwojcik.com>'
+]
+license = 'MIT'
+classifiers = [
+    'Development Status :: 3 - Alpha',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Intended Audience :: Developers',
+    'Intended Audience :: Information Technology',
+    'Intended Audience :: System Administrators',
+    'License :: OSI Approved :: MIT License',
+    'Topic :: Internet',
+]
+readme = "README.md"
+homepage = "https://github.com/tomwojcik/proxyx"
+repository = "https://github.com/tomwojcik/proxyx"
+keywords = ["proxy", "proxyx", "simple proxy"]
+
+[tool.poetry.dependencies]
+python = "^3.9.0"
+sentry-sdk = "^1.12.1"
+starlette = "^0.23.1"
+httpx = "^0.23.1"
+pydantic = "^1.10.2"
+pydantic-yaml = "^0.8.1"
+uvicorn = "^0.20.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+flake8 = "^5.0.3"
+bandit = "^1.7.4"
+safety = "^2.3.2"
+sphinx = "^5.3.0"
+sphinx-rtd-theme = "^1.1.1"
+pre-commit = "^2.20.0"
+coverage = "^6.5.0"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pytest-sugar = "^0.9.6"
+pytest-xdist = "^3.1.0"
+pytest-asyncio = "^0.20.3"
+codecov = "^2.1.12"
+pre-commit-hooks = "^4.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+target-version = ['py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profiling
+)/
+'''
+experimental_string_processing = true
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 79
+force_grid_wrap = 0
+use_parentheses = true
+profile = "black"
+force_single_line = true

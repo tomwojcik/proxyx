@@ -1,0 +1,99 @@
+{
+  "additionalProperties": false,
+  "definitions": {
+    "MatchingRule": {
+      "additionalProperties": false,
+      "description": "`pydantic.BaseModel` class with built-in YAML support.\n\nYou can alternatively inherit from this to implement your model:\n`(pydantic_yaml.YamlModelMixin, pydantic.BaseModel)`\n\nSee Also\n--------\npydantic-yaml: https://github.com/NowanIlfideme/pydantic-yaml\npydantic: https://pydantic-docs.helpmanual.io/\npyyaml: https://pyyaml.org/\nruamel.yaml: https://yaml.readthedocs.io/en/latest/index.html",
+      "properties": {
+        "header_patterns": {
+          "default": {},
+          "description": "If you need to route based on header value, put your matching rule here. It accepts regex.",
+          "title": "Header Patterns",
+          "type": "object"
+        },
+        "url_patterns": {
+          "default": [
+            "*"
+          ],
+          "description": "A list of regex patterns for matching request urls. If one of the patterns is matching, this router will be used. The only non-regex special value allowed is an asterix (``*``). If used, it will catch all incoming requests. Used by default, if no other value is provided. If multiple routers match the same request url, only the first one will be used.",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "format": "regex",
+                "type": "string"
+              }
+            ]
+          },
+          "title": "URL Patterns",
+          "type": "array"
+        }
+      },
+      "title": "MatchingRule",
+      "type": "object"
+    },
+    "Router": {
+      "additionalProperties": false,
+      "description": "A custom object that defines three steps:\n - matching criteria for incoming request,\n - incoming request validation\n - where to pass it",
+      "properties": {
+        "force_https": {
+          "default": true,
+          "description": "Whether to always use https, even if http is provided from the downstream.",
+          "title": "Force Https",
+          "type": "boolean"
+        },
+        "matching_rules": {
+          "items": {
+            "$ref": "#/definitions/MatchingRule"
+          },
+          "title": "Matching Rules",
+          "type": "array"
+        },
+        "replace_target_host": {
+          "description": "Will replace the incoming request host with this one.",
+          "title": "Target host",
+          "type": "string"
+        },
+        "request_path_has_full_path": {
+          "default": true,
+          "description": "Request expects one optional attribute. It might be the entire path www.example.com/resource, or just /resource.",
+          "title": "Request path has full path",
+          "type": "boolean"
+        },
+        "required_headers": {
+          "additionalProperties": {
+            "format": "regex",
+            "type": "string"
+          },
+          "default": {},
+          "description": "For each key-value pair, where key is the header key and value is a regex pattern,validate whether the key exists. If so, validate if the value is matching the regex pattern.An asterix (``*``) is a special value that will allow for any value.",
+          "title": "Required Headers",
+          "type": "object"
+        }
+      },
+      "required": [
+        "matching_rules"
+      ],
+      "title": "Router",
+      "type": "object"
+    }
+  },
+  "description": "Main object that holds all the information about all the routers.\nIt is used directly in the view.",
+  "properties": {
+    "routers": {
+      "description": "List of router objects.",
+      "items": {
+        "$ref": "#/definitions/Router"
+      },
+      "title": "Routers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "routers"
+  ],
+  "title": "Proxyx",
+  "type": "object"
+}

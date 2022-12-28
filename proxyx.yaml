@@ -1,0 +1,7 @@
+routers:
+  - matching_rules:
+      - url_patterns:
+          - '*'
+    replace_target_host: example.com
+    request_path_has_full_path: false
+    force_https: true
