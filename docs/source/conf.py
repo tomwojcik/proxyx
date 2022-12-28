@@ -10,12 +10,18 @@
 import pathlib
 import sys
 
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+import toml
 
-project = "Proxyx"
+ROOT_DIR = pathlib.Path(__file__).parents[2].resolve()
+sys.path.insert(0, ROOT_DIR.as_posix())
+
+pyproject = toml.load((ROOT_DIR / "pyproject.toml").as_posix())
+poetry = pyproject["tool"]["poetry"]
+
+project = poetry["name"]
 copyright = "2022, Tom Wojcik"
-author = "Tom Wojcik"
-release = "0.0.1"
+author = poetry["authors"][0]
+release = poetry["version"]
 
 extensions = [
     "sphinx.ext.duration",

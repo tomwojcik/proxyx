@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'proxyx'
-version = "v0.0.1"
+version = "0.0.2"
 description = 'A very simple proxy server that just works.'
 authors = [
     'Tom Wojcik <proxyx-pkg@tomwojcik.com>'
@@ -36,6 +36,7 @@ pydantic = "^1.10.2"
 pydantic-yaml = "^0.8.1"
 uvicorn = "^0.20.0"
 sentry-sdk = {version = "^1.12.1", optional = true}
+pyyaml = "^6.0"
 
 [tool.poetry.extras]
 sentry-sdk = ["sentry-sdk"]
@@ -58,6 +59,7 @@ pytest-xdist = "^3.1.0"
 pytest-asyncio = "^0.20.3"
 codecov = "^2.1.12"
 pre-commit-hooks = "^4.4.0"
+autodoc-pydantic = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core>=1.2.0"]
