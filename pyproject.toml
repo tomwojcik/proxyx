@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'proxyx'
-version = "0.0.1"
+version = "v0.0.1"
 description = 'A very simple proxy server that just works.'
 authors = [
     'Tom Wojcik <proxyx-pkg@tomwojcik.com>'
@@ -22,16 +22,24 @@ classifiers = [
 readme = "README.md"
 homepage = "https://github.com/tomwojcik/proxyx"
 repository = "https://github.com/tomwojcik/proxyx"
+documentation = "https://proxyx.readthedocs.io/"
 keywords = ["proxy", "proxyx", "simple proxy"]
+packages = [
+    { include = "proxyx" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9.0"
-sentry-sdk = "^1.12.1"
 starlette = "^0.23.1"
 httpx = "^0.23.1"
 pydantic = "^1.10.2"
 pydantic-yaml = "^0.8.1"
 uvicorn = "^0.20.0"
+sentry-sdk = {version = "^1.12.1", optional = true}
+
+[tool.poetry.extras]
+sentry-sdk = ["sentry-sdk"]
+# todo: add redis for limiter
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
