@@ -37,6 +37,7 @@ pydantic-yaml = "^0.8.1"
 uvicorn = "^0.20.0"
 sentry-sdk = {version = "^1.12.1", optional = true}
 pyyaml = "^6.0"
+gunicorn = "^20.1.0"
 
 [tool.poetry.extras]
 sentry-sdk = ["sentry-sdk"]

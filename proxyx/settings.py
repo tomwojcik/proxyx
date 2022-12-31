@@ -14,6 +14,7 @@ PROXYX_ROUTING_CONFIG_PATH = config("PROXYX_ROUTING_CONFIG_PATH")
 
 # Starlette config
 DEBUG = config("DEBUG", cast=bool, default=False)
+LOG_ALL_HEADERS = config("LOG_ALL_HEADERS", cast=bool, default=False)
 
 # CORSMiddleware config
 ALLOW_ORIGINS = config("ALLOW_ORIGINS", cast=CommaSeparatedStrings, default=[])

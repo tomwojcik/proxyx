@@ -12,7 +12,7 @@ local-install:
 local-uninstall:
 	pip uninstall -y proxyx
 
-local-reinstall: uninstall install
+local-reinstall: local-uninstall local-install
 
 docker-build:
 	docker build -t proxyx .

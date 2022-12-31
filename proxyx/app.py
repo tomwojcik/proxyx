@@ -1,4 +1,7 @@
+import logging
+
 import uvicorn
+import yaml
 from starlette import status
 from starlette.applications import Starlette
 from starlette.middleware import Middleware
@@ -15,7 +18,14 @@ from proxyx.models import Proxyx
 proxyx_model = Proxyx.load(settings.PROXYX_ROUTING_CONFIG_PATH)
 
 
+logger = logging.getLogger("proxyx")
+
+
 async def handle_proxy_view(request: Request):
+    if settings.LOG_ALL_HEADERS:
+        logger.info(
+            f"Headers for {request.method} {request.url}: {request.headers}"
+        )
     for router in proxyx_model.routers:
         for matching_rule in router.matching_rules:
             if matching_rule.is_matching(request):
@@ -44,6 +54,15 @@ middleware = [
 ]
 
 app = Starlette(debug=settings.DEBUG, routes=routes, middleware=middleware)
+
+
+@app.on_event("startup")
+async def startup_event():
+    config_path = (settings.ROOT_DIR / "proxyx" / "logging.yaml").as_posix()
+    with open(config_path, "rb") as fd:
+        config = yaml.load(fd, Loader=yaml.SafeLoader)
+    logging.config.dictConfig(config)
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, proxy_headers=True)
