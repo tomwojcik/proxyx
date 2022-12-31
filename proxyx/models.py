@@ -314,6 +314,6 @@ class Proxyx(BaseModel):
         Loads the proxy configuration from the yaml file.
 
         The path to this file needs to be specified as env variable
-        ROUTING_CONFIG_PATH.
+        PROXYX_ROUTING_CONFIG_PATH.
         """
         return cls.parse_file(file_path)

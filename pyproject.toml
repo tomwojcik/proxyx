@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'proxyx'
-version = "0.0.2"
+version = "v0.0.2"
 description = 'A very simple proxy server that just works.'
 authors = [
     'Tom Wojcik <proxyx-pkg@tomwojcik.com>'

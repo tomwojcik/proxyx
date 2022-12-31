@@ -6,15 +6,11 @@ from starlette.datastructures import CommaSeparatedStrings
 
 ROOT_DIR = pathlib.Path(__file__).parents[1].resolve()
 
-SERVER_CONFIG_PATH = os.environ.get(
-    "SERVER_CONFIG_PATH", ROOT_DIR / "env.server"
-)
 
-config = Config(SERVER_CONFIG_PATH)
+PROXYX_APP_CONFIG_PATH = os.environ.get("PROXYX_APP_CONFIG_PATH")
+config = Config(env_file=PROXYX_APP_CONFIG_PATH)
 
-ROUTING_CONFIG_PATH = config(
-    "ROUTING_CONFIG_PATH", default=ROOT_DIR / "proxyx.yaml"
-)
+PROXYX_ROUTING_CONFIG_PATH = config("PROXYX_ROUTING_CONFIG_PATH")
 
 # Starlette config
 DEBUG = config("DEBUG", cast=bool, default=False)

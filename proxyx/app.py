@@ -12,7 +12,7 @@ from proxyx import settings
 from proxyx.errors import ProxyxError
 from proxyx.models import Proxyx
 
-proxyx_model = Proxyx.load(settings.ROUTING_CONFIG_PATH)
+proxyx_model = Proxyx.load(settings.PROXYX_ROUTING_CONFIG_PATH)
 
 
 async def handle_proxy_view(request: Request):
