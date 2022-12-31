@@ -7,7 +7,7 @@
       "properties": {
         "header_patterns": {
           "default": {},
-          "description": "If you need to route based on header value, put your matching rule here. It accepts regex.",
+          "description": "If you need to route based on header value, put your matching rule here. It accepts regex and an asterix (``*``) for catch-all.",
           "title": "Header Patterns",
           "type": "object"
         },
@@ -36,7 +36,7 @@
     },
     "Router": {
       "additionalProperties": false,
-      "description": "A custom object that defines three steps:\n - matching criteria for incoming request,\n - incoming request validation\n - where to pass it",
+      "description": "A custom object that defines three steps:\n\n- matching criteria for incoming request,\n- how to validate the request,\n- where to pass it.",
       "properties": {
         "force_https": {
           "default": true,
@@ -80,10 +80,10 @@
       "type": "object"
     }
   },
-  "description": "Main object that holds all the information about all the routers.\nIt is used directly in the view.",
+  "description": "Main object that holds all the information about all the routers.\n\nIt is used directly in the view.",
   "properties": {
     "routers": {
-      "description": "List of router objects.",
+      "description": "A list of router objects.",
       "items": {
         "$ref": "#/definitions/Router"
       },
